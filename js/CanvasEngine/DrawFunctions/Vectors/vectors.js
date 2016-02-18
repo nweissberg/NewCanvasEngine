@@ -11,10 +11,10 @@ var canvasObj = Class({
 		this.canvasCtx = canvasCtx || ctxMain;
 	},
 	draw:function(){
-		
+
 	},
 	logic:function(){
-		
+
 	},
 	update:function(){
 		this.logic();
@@ -22,7 +22,7 @@ var canvasObj = Class({
 	},
 });
 
-function drawPlane(canvasCtx, color, x, y, w, h, rot, pivot, stroke){
+function drawPlane(canvasCtx, color, x, y, w, h, rot, pivot, strokeWidth, strokeColor){
 	canvasCtx ? canvasCtx = canvasCtx : canvasCtx = ctxMain;
 	color ? color = color : color = "#FFF";
 	x ? x = x : x = 0;
@@ -40,9 +40,14 @@ function drawPlane(canvasCtx, color, x, y, w, h, rot, pivot, stroke){
 	canvasCtx.rect( -((w*renderResolution)*pivot[0]), -((h*renderResolution)*pivot[1]), w*renderResolution, h*renderResolution);
 	canvasCtx.fillStyle = colorCheck(color);
 	canvasCtx.fill();
-	if (stroke != undefined){
-		canvasCtx.lineWidth = stroke[0];
-		canvasCtx.strokeStyle = colorCheck(stroke[1]);
+
+	if (strokeWidth != undefined || strokeColor != undefined) {
+		if (strokeWidth != undefined){
+			canvasCtx.lineWidth = strokeWidth;
+		}
+		if (strokeColor != undefined) {
+			canvasCtx.strokeStyle = colorCheck(strokeColor);
+		}
 		canvasCtx.stroke();
 	}
 	canvasCtx.restore();
